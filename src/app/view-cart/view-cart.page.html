@@ -1,0 +1,61 @@
+<ion-header translucent no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="dark">
+        <ion-back-button></ion-back-button>
+        Carrito de compras
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <ion-list>    
+      <ion-item-sliding *ngFor="let item of products; let i = index">       
+        <ion-item class="item_content" *ngIf="item.inCar>0">
+          <ion-card>
+            <div class="parent" >
+              <div class="div1"> <img class="product_img" [src]="item.photo" alt=""></div>
+              <div class="div2">
+                <ion-text color="primary">
+                  <h2>{{item.name}}</h2>
+                </ion-text>
+                <p>
+                  <ion-text>{{item.description}}</ion-text>
+                </p>
+              </div>
+              <div class="div3">
+                <ion-button fill="outline" shape="round" (click)="substractItem(item,item.id)">-</ion-button>
+                <ion-label>{{item.inCar}}</ion-label>
+                <ion-button fill="outline" shape="round" (click)="addItem(item,item.id)">+</ion-button>
+              </div>
+              <div class="div4">
+                <ion-label color="success">{{item.price*item.inCar | currency }}</ion-label>
+              </div>
+            </div>
+          </ion-card>
+        </ion-item>    
+        <ion-item-options>
+          <ion-item-option color="danger" (click)="removeItem(item.id)">
+            <ion-icon slot="bottom" name="trash" ></ion-icon>
+            Eliminar
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    
+  </div>
+</ion-content>
+  <ion-footer>
+    <ion-toolbar>
+      <div class="cartPrice">
+        <ion-label>Total con envio</ion-label>
+        <ion-label color="primary">{{cartPrice | currency}}</ion-label>
+      </div>
+      <ion-button expand="block"  shape="round">
+        Comprar
+      </ion-button>
+    </ion-toolbar>
+  </ion-footer>
