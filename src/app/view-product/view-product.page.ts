@@ -25,8 +25,4 @@ export class ViewProductPage implements OnInit {
       this.productService.getProductByID(params.id).subscribe(item => {this.product= item as Product});
     });
   }
-  public addToCartByID(id:string){
-
-  }
-
 }
